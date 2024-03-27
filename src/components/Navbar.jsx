@@ -1,5 +1,6 @@
 import React from 'react';
 import logo from '../assets/Nature-Nexus-logo.png';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   return (
@@ -7,7 +8,7 @@ const Navbar = () => {
       <div className="container mx-auto flex justify-between items-center">
         {/* Logo Section */}
         <div className="flex items-center">
-          <img src={logo} alt="Logo" className="h-14 mr-2" />
+          <img src={logo} alt="Logo" className="h-12 mr-2" />
           {/* <span>Nature Nexus</span> */}
           <div className="">
             <span className="block font-bold text-2xl leading-none bg-gradient-to-r from-green-200 to-green-500 text-transparent bg-clip-text hover:cursor-pointer">
@@ -21,21 +22,36 @@ const Navbar = () => {
 
         {/* Navigation Links */}
         <div className="hidden md:flex space-x-4">
-          <a href="#" className="hover:text-gray-300">
+          <Link
+            to="/"
+            className="font-bold text-lg text-white hover:text-green-400 hover:scale-110 duration-200 transition ease-in"
+          >
             Home
-          </a>
-          <a href="#" className="hover:text-gray-300">
-            Link 1
-          </a>
-          <a href="#" className="hover:text-gray-300">
-            Link 2
-          </a>
-          <a href="#" className="hover:text-gray-300">
-            Link 3
-          </a>
-          <a href="#" className="hover:text-gray-300">
-            Link 4
-          </a>
+          </Link>
+          <Link
+            to="/query1"
+            className="font-bold text-lg text-white hover:text-green-400 hover:scale-110 duration-200 transition ease-in"
+          >
+            Query 1
+          </Link>
+          <Link
+            to="/query2"
+            className="font-bold text-lg text-white hover:text-green-400 hover:scale-110 duration-200 transition ease-in"
+          >
+            Query 2
+          </Link>
+          <Link
+            to="/query3"
+            className="font-bold text-lg text-white hover:text-green-400 hover:scale-110 duration-200 transition ease-in"
+          >
+            Query 3
+          </Link>
+          <Link
+            to="/query4"
+            className="font-bold text-lg text-white hover:text-green-400 hover:scale-110 duration-200 transition ease-in"
+          >
+            Query 4
+          </Link>
         </div>
 
         {/* Sign Up / Sign In Button */}
