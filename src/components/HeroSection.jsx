@@ -19,10 +19,10 @@ const HomePage = () => {
               </p>
               <div>
                 <div className="flex justify-center items-center">
-                  <button className="bg-[#345ad7] text-white py-3 px-8 text-lg font-extrabold mr-4 rounded-lg hover:bg-[#192b50] transition ease-in duration-200 hover:scale-105">
+                  <button className="bg-[#345ad7] text-white py-3 px-8 text-lg font-extrabold mr-4 rounded-lg hover:bg-[#192b50] transition ease-in duration-200 hover:scale-105 border-2 border-[#345ad7]">
                     Get Started
                   </button>
-                  <button className="bg-transparent py-3 px-8 text-lg font-extrabold border border-[#2543a6] rounded-lg hover:bg-[#ebf4ff] text-[#2543a6] transition ease-in duration-200 hover:scale-105">
+                  <button className="bg-transparent py-3 px-8 text-lg font-extrabold  border-[#2543a6] rounded-lg hover:bg-green-300 text-[#2543a6] transition ease-in duration-200 hover:scale-105 border-2">
                     View More
                   </button>
                 </div>
@@ -36,7 +36,7 @@ const HomePage = () => {
           <img
             src={HeroImage}
             alt="Hero"
-            className="max-w-full h-auto rounded-xl shadow-lg"
+            className="max-w-full h-auto rounded-xl shadow-xl hover:scale-105 hover:shadow-green-400 duration-300 transition ease-in-out"
           />
         </div>
       </div>
