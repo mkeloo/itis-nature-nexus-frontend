@@ -7,8 +7,16 @@ const Navbar = () => {
       <div className="container mx-auto flex justify-between items-center">
         {/* Logo Section */}
         <div className="flex items-center">
-          <img src={logo} alt="Logo" className="h-10 mr-2" />
-          <span>Nature Nexus</span>
+          <img src={logo} alt="Logo" className="h-14 mr-2" />
+          {/* <span>Nature Nexus</span> */}
+          <div className="">
+            <span className="block font-bold text-2xl leading-none bg-gradient-to-r from-green-200 to-green-500 text-transparent bg-clip-text hover:cursor-pointer">
+              Nature
+            </span>
+            <span className="block font-bold text-2xl leading-none bg-gradient-to-r from-green-200 to-green-500 text-transparent bg-clip-text hover:cursor-pointer">
+              Nexus
+            </span>
+          </div>
         </div>
 
         {/* Navigation Links */}

@@ -8,10 +8,10 @@ const HomePage = () => {
         {/* Text Area */}
         <div className="w-full lg:w-[45%] px-4 lg:px-0 mb-10 lg:mb-0 flex flex-col justify-center h-full m-4">
           <div className="mx-4">
-            <h1 className="text-6xl lg:text-7xl font-bold mb-4 text-[#2543a6] bg-gradient-to-r from-green-400 to-blue-500 rounded-lg">
+            <h1 className="text-6xl lg:text-7xl font-bold mb-4 text-[#2543a6] bg-gradient-to-r from-emerald-400 to-[#5ba2ff] rounded-lg">
               Welcome to Nature Nexus
             </h1>
-            <div className="bg-opacity-10 p-6 bg-blue-600 rounded-xl">
+            <div className="bg-opacity-35 p-6 bg-[#5ba2ff] rounded-xl">
               <p className="text-lg lg:text-2xl mb-8 text-indigo-900 font-bold">
                 Discover the diversity of life with Nature Nexus. Explore,
                 analyze, and connect with global species data at your
