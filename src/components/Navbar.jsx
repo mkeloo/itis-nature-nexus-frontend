@@ -3,7 +3,7 @@ import logo from '../assets/Nature-Nexus-logo.png';
 
 const Navbar = () => {
   return (
-    <nav className="bg-gray-800 text-white p-4">
+    <nav className="bg-indigo-950 text-white p-4">
       <div className="container mx-auto flex justify-between items-center">
         {/* Logo Section */}
         <div className="flex items-center">
