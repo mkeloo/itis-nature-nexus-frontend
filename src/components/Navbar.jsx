@@ -22,42 +22,54 @@ const Navbar = () => {
 
         {/* Navigation Links */}
         <div className="hidden md:flex space-x-4">
-          <Link
+          {/* <Link
             to="/"
-            className="font-bold text-lg text-white hover:text-green-400 hover:scale-110 duration-200 transition ease-in"
+            className="font-bold text-md text-white hover:text-green-400 hover:scale-110 duration-200 transition ease-in"
           >
             Home
+          </Link> */}
+          <Link
+            to="/query-example"
+            className="font-bold text-md text-white hover:text-green-400 hover:scale-110 duration-200 transition ease-in"
+          >
+            Ex Query 1
           </Link>
           <Link
-            to="/query1"
-            className="font-bold text-lg text-white hover:text-green-400 hover:scale-110 duration-200 transition ease-in"
+            to="/climate-correlation"
+            className="font-bold text-md text-white hover:text-green-400 hover:scale-110 duration-200 transition ease-in"
           >
-            Query 1
+            Climate & Birds
           </Link>
           <Link
-            to="/query2"
-            className="font-bold text-lg text-white hover:text-green-400 hover:scale-110 duration-200 transition ease-in"
+            to="/urbanization-impact"
+            className="font-bold text-md text-white hover:text-green-400 hover:scale-110 duration-200 transition ease-in"
           >
-            Query 2
+            Urbanization
           </Link>
           <Link
-            to="/query3"
-            className="font-bold text-lg text-white hover:text-green-400 hover:scale-110 duration-200 transition ease-in"
+            to="/seasonal-trends"
+            className="font-bold text-md text-white hover:text-green-400 hover:scale-110 duration-200 transition ease-in"
           >
-            Query 3
+            Seasonal Trends
           </Link>
           <Link
-            to="/query4"
-            className="font-bold text-lg text-white hover:text-green-400 hover:scale-110 duration-200 transition ease-in"
+            to="/long-term-trends"
+            className="font-bold text-md text-white hover:text-green-400 hover:scale-110 duration-200 transition ease-in"
           >
-            Query 4
+            Long-Term Trends
+          </Link>
+          <Link
+            to="/conservation-impact"
+            className="font-bold text-md text-white hover:text-green-400 hover:scale-110 duration-200 transition ease-in"
+          >
+            Conservation
           </Link>
         </div>
 
         {/* Sign Up / Sign In Button */}
         <div>
-          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-            Sign Up / Sign In
+          <button className="bg-gradient-to-r from-green-200 to-green-500 text-green-900 font-bold py-1 px-4 hover:scale-110 duration-200 text-md transition ease-in border-2 border-emerald-900 rounded-lg">
+            <Link to="/">Home</Link>
           </button>
         </div>
       </div>
