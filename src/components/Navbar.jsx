@@ -66,7 +66,7 @@ const Navbar = () => {
           </Link>
         </div>
 
-        {/* Sign Up / Sign In Button */}
+        {/* home */}
         <div>
           <button className="bg-gradient-to-r from-green-200 to-green-500 text-green-900 font-bold py-1 px-4 hover:scale-110 duration-200 text-md transition ease-in border-2 border-emerald-900 rounded-lg">
             <Link to="/">Home</Link>
