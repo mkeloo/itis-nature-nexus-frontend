@@ -1,4 +1,4 @@
-import Query3Chart from '../components/QueryComponents/Query3Chart';
+import Query3Chart from '../components/QueryComponents/Query3/Query3Chart';
 
 const Page3 = () => {
   return (

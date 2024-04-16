@@ -1,4 +1,4 @@
-import Query1Chart from '../components/QueryComponents/Query1Chart';
+import Query1Chart from '../components/QueryComponents/Query1/Query1Chart';
 
 const Page1 = () => {
   return (
