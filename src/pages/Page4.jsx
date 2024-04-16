@@ -1,4 +1,11 @@
-const LongTermTrendsPage4 = () => {
-  return <div>LongTermTrendsPage4</div>;
+import Query4Chart from '../components/QueryComponents/Query4Chart';
+
+const Page4 = () => {
+  return (
+    <>
+      <h1>Page4</h1>
+      <Query4Chart />
+    </>
+  );
 };
-export default LongTermTrendsPage4;
+export default Page4;

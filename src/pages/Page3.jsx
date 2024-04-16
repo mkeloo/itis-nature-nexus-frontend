@@ -1,4 +1,11 @@
-const SeasonalEndangeredAnalysisPage3 = () => {
-  return <div>SeasonalEndangeredAnalysisPage3</div>;
+import Query3Chart from '../components/QueryComponents/Query3Chart';
+
+const Page3 = () => {
+  return (
+    <>
+      <h1>Page3</h1>
+      <Query3Chart />
+    </>
+  );
 };
-export default SeasonalEndangeredAnalysisPage3;
+export default Page3;
