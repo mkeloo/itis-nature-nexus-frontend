@@ -65,7 +65,7 @@ const Query2Chart = () => {
       <div>Total tuples: {numTuples}</div>
       
       <h2>Biodiversity Index and Temperature Median Over Time</h2>
-      <LineChart width={1000} height={600} data={data}>
+      <LineChart width={1200} height={600} data={data}>
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="YEAR" />
         <YAxis />
@@ -76,7 +76,7 @@ const Query2Chart = () => {
       </LineChart>
 
       <h2>Biodiversity Index to Precipitation Median Ratio Over Time</h2>
-      <LineChart width={1000} height={600} data={data}>
+      <LineChart width={1200} height={600} data={data}>
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="YEAR" />
         <YAxis />
@@ -84,6 +84,17 @@ const Query2Chart = () => {
         <Legend />
         <Line type="monotone" dataKey="BIODIVERSITY_TO_PRECIPITATION_RATIO" stroke="#ff0000" name="Biodiversity/Precipitation Ratio" />
       </LineChart>
+
+      <h2>Biodiversity Index Over Time</h2>
+      <LineChart width={1200} height={600} data={data}>
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis dataKey="YEAR" />
+        <YAxis />
+        <Tooltip />
+        <Legend />
+        <Line type="monotone" dataKey="BIODIVERSITY_SCORE" stroke="#8884d8" name="Biodiversity Score" />
+      </LineChart>
+
     </div>
   );
 };
