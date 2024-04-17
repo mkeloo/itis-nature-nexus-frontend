@@ -44,7 +44,7 @@ const Navbar = () => {
             to="/urbanization-impact"
             className="font-bold text-md text-white hover:text-green-400 hover:scale-110 duration-200 transition ease-in"
           >
-            Urbanization
+            Biodiversity & Climate
           </Link>
           <Link
             to="/seasonal-trends"
