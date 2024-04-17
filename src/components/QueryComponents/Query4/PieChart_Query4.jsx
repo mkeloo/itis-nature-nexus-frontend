@@ -1,6 +1,24 @@
 import React from 'react';
 import { PieChart, Pie, Tooltip, Cell, Legend } from 'recharts';
 
+
+
+const PieChart_Query4 = () => {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('http://localhost:3000/api/query4');
+        setData(response.data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
 // Assuming you have data arrays for observation count and conservation status
 
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#AF19FF'];
@@ -50,5 +68,6 @@ const PieChartComponent = ({ data }) => (
     <Legend />
   </PieChart>
 );
+};
 
 export default PieChartComponent;

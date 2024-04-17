@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
-
 
 const LineGraph = ({ data }) => (
   <LineChart width={800} height={400} data={data} margin={{ top: 20, right: 30, left: 20, bottom: 20 }}>
@@ -14,6 +14,23 @@ const LineGraph = ({ data }) => (
   </LineChart>
 );
 
-export default LineGraph;
+const Line_Graph_Query = () => {
+  const [data, setData] = useState([]);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('http://localhost:3000/api/query4');
+        setData(response.data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
 
+    fetchData();
+  }, []);
+
+  return <LineGraph data={data} />;
+};
+
+export default Line_Graph_Query;
