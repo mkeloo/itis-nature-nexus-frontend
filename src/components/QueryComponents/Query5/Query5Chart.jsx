@@ -1,89 +1,92 @@
-import React, { useEffect, useRef, useState } from 'react';
-import * as d3 from 'd3';
+import React, { useEffect, useState } from 'react';
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+} from 'recharts';
+import axios from 'axios';
 
+// This component assumes your API returns data in the format you provided
 const Query5Chart = () => {
-  const chartRef = useRef();
-  const [data, setData] = useState([]);
+  const [chartData, setChartData] = useState([]);
 
   useEffect(() => {
-    fetch('/api/conservationImpact')
-      .then((response) => response.json())
-      .then(setData);
+    const fetchData = async () => {
+      try {
+        const { data } = await axios.get('http://localhost:3000/api/query5');
+
+        // Process and group the data
+        const processedData = data.reduce((acc, item) => {
+          // Find the stateProvince in the accumulated data
+          let stateEntry = acc.find(
+            (entry) => entry.stateProvince === item.STATEPROVINCE
+          );
+          if (!stateEntry) {
+            stateEntry = {
+              stateProvince: item.STATEPROVINCE,
+              threatened: 0,
+              nonThreatened: 0,
+            };
+            acc.push(stateEntry);
+          }
+
+          // If the species is threatened, add to threatened, else add to nonThreatened
+          if (item.THREATENEDPERCENTAGE > 0) {
+            stateEntry.threatened += item.NUMBEROFSPECIES;
+          } else {
+            stateEntry.nonThreatened += item.NUMBEROFSPECIES;
+          }
+
+          return acc;
+        }, []);
+
+        setChartData(processedData);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
   }, []);
 
-  useEffect(() => {
-    if (data.length > 0) {
-      const svg = d3.select(chartRef.current);
-      const margin = { top: 20, right: 20, bottom: 30, left: 40 };
-      const width = +svg.attr('width') - margin.left - margin.right;
-      const height = +svg.attr('height') - margin.top - margin.bottom;
-
-      // Transform data
-      const nestedData = d3
-        .nest()
-        .key((d) => d.year)
-        .entries(data);
-
-      // Scales
-      const x = d3
-        .scaleBand()
-        .domain(nestedData.map((d) => d.key))
-        .range([margin.left, width - margin.right])
-        .padding(0.1);
-
-      const y = d3
-        .scaleLinear()
-        .domain([
-          0,
-          d3.max(data, (d) =>
-            Math.max(d.uniqueSpeciesCount, d.observationCount)
-          ),
-        ])
-        .nice()
-        .range([height - margin.bottom, margin.top]);
-
-      // Axes
-      svg
-        .append('g')
-        .attr('transform', `translate(0,${height - margin.bottom})`)
-        .call(d3.axisBottom(x).tickSizeOuter(0));
-
-      svg
-        .append('g')
-        .attr('transform', `translate(${margin.left},0)`)
-        .call(d3.axisLeft(y));
-
-      // Bars for unique species count
-      svg
-        .selectAll('.speciesBar')
-        .data(data.filter((d) => d.conservationStatus === 'Inside'))
-        .enter()
-        .append('rect')
-        .attr('class', 'speciesBar')
-        .attr('x', (d) => x(d.year))
-        .attr('y', (d) => y(d.uniqueSpeciesCount))
-        .attr('width', x.bandwidth() / 2)
-        .attr('height', (d) => height - margin.bottom - y(d.uniqueSpeciesCount))
-        .attr('fill', '#4C9A2A');
-
-      // Bars for observation count
-      svg
-        .selectAll('.observationBar')
-        .data(data.filter((d) => d.conservationStatus === 'Outside'))
-        .enter()
-        .append('rect')
-        .attr('class', 'observationBar')
-        .attr('x', (d) => x(d.year) + x.bandwidth() / 2)
-        .attr('y', (d) => y(d.observationCount))
-        .attr('width', x.bandwidth() / 2)
-        .attr('height', (d) => height - margin.bottom - y(d.observationCount))
-        .attr('fill', '#FF4136');
-
-      // Optional: Add legend, tooltips, etc.
-    }
-  }, [data]);
-
-  return <svg ref={chartRef} width="800" height="400"></svg>;
+  return (
+    <ResponsiveContainer width="100%" height={400}>
+      <BarChart
+        width={500}
+        height={300}
+        data={chartData}
+        margin={{
+          top: 20,
+          right: 30,
+          left: 20,
+          bottom: 5,
+        }}
+      >
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis dataKey="stateProvince" />
+        <YAxis />
+        <Tooltip />
+        <Legend />
+        <Bar
+          dataKey="threatened"
+          stackId="a"
+          fill="#82ca9d"
+          name="Threatened Species"
+        />
+        <Bar
+          dataKey="nonThreatened"
+          stackId="a"
+          fill="#8884d8"
+          name="Non-Threatened Species"
+        />
+      </BarChart>
+    </ResponsiveContainer>
+  );
 };
 
 export default Query5Chart;
