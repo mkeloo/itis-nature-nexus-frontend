@@ -39,18 +39,23 @@ const Query2Chart = () => {
   return (
     <div>
       <div>
-        <label htmlFor="startYear">Start Year:</label>
+      <label htmlFor="startYear">Start Year:</label>
         <select id="startYear" value={startYear} onChange={handleStartYearChange}>
           <option value="">Select Start Year</option>
-          <option value="1950">1950</option>
-          <option value="2000">2000</option>
+          {Array.from({ length: 2023 - 1950 }, (_, index) => {
+            const year = 1950 + index;
+            return <option key={year} value={year}>{year}</option>;
+          })}
         </select>
       </div>
       <div>
-        <label htmlFor="endYear">End Year:</label>
+      <label htmlFor="endYear">End Year:</label>
         <select id="endYear" value={endYear} onChange={handleEndYearChange}>
           <option value="">Select End Year</option>
-          <option value="2022">2022</option>
+          {Array.from({ length: 2023 - 1950 }, (_, index) => {
+            const year = 1950 + index;
+            return <option key={year} value={year}>{year}</option>;
+          })}
         </select>
       </div>
       <div>Total tuples: {numTuples}</div>
