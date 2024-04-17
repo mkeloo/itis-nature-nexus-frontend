@@ -41,7 +41,7 @@ const Navbar = () => {
             Climate & Birds
           </Link>
           <Link
-            to="/urbanization-impact"
+            to="/biodiv-impact"
             className="font-bold text-md text-white hover:text-green-400 hover:scale-110 duration-200 transition ease-in"
           >
             Biodiversity & Climate

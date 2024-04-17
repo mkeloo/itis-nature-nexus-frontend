@@ -17,7 +17,11 @@ const Query2Chart = () => {
           }
           const result = await response.json();
           console.log('called query2', result);
-          setData(result);
+          const dataWithRatio = result.map(entry => ({
+            ...entry,
+            BIODIVERSITY_TO_PRECIPITATION_RATIO: entry.BIODIVERSITY_SCORE / entry.PRECIPITATION_MEDIAN
+          }));
+          setData(dataWithRatio);
           setNumTuples(result.length);
         }
       } catch (error) {
@@ -39,7 +43,7 @@ const Query2Chart = () => {
   return (
     <div>
       <div>
-      <label htmlFor="startYear">Start Year:</label>
+        <label htmlFor="startYear">Start Year:</label>
         <select id="startYear" value={startYear} onChange={handleStartYearChange}>
           <option value="">Select Start Year</option>
           {Array.from({ length: 2023 - 1950 }, (_, index) => {
@@ -49,7 +53,7 @@ const Query2Chart = () => {
         </select>
       </div>
       <div>
-      <label htmlFor="endYear">End Year:</label>
+        <label htmlFor="endYear">End Year:</label>
         <select id="endYear" value={endYear} onChange={handleEndYearChange}>
           <option value="">Select End Year</option>
           {Array.from({ length: 2023 - 1950 }, (_, index) => {
@@ -60,37 +64,25 @@ const Query2Chart = () => {
       </div>
       <div>Total tuples: {numTuples}</div>
       
-      {/* Biodiversity Index Over Time */}
-      <h2>Biodiversity Index Over Time</h2>
-      <LineChart width={1000} height={400} data={data}>
+      <h2>Biodiversity Index and Temperature Median Over Time</h2>
+      <LineChart width={1000} height={600} data={data}>
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="YEAR" />
         <YAxis />
         <Tooltip />
         <Legend />
         <Line type="monotone" dataKey="BIODIVERSITY_SCORE" stroke="#8884d8" name="Biodiversity Score" />
-      </LineChart>
-      
-      {/* Precipitation Median Over Time */}
-      <h2>Precipitation Median Over Time</h2>
-      <LineChart width={1000} height={400} data={data}>
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="YEAR" />
-        <YAxis />
-        <Tooltip />
-        <Legend />
-        <Line type="monotone" dataKey="PRECIPITATION_MEDIAN" stroke="#82ca9d" name="Precipitation Median" />
-      </LineChart>
-      
-      {/* Temperature Median Over Time */}
-      <h2>Temperature Median Over Time</h2>
-      <LineChart width={1000} height={400} data={data}>
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="YEAR" />
-        <YAxis />
-        <Tooltip />
-        <Legend />
         <Line type="monotone" dataKey="TEMPERATURE_MEDIAN" stroke="#ffc658" name="Temperature Median" />
+      </LineChart>
+
+      <h2>Biodiversity Index to Precipitation Median Ratio Over Time</h2>
+      <LineChart width={1000} height={600} data={data}>
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis dataKey="YEAR" />
+        <YAxis />
+        <Tooltip />
+        <Legend />
+        <Line type="monotone" dataKey="BIODIVERSITY_TO_PRECIPITATION_RATIO" stroke="#ff0000" name="Biodiversity/Precipitation Ratio" />
       </LineChart>
     </div>
   );
