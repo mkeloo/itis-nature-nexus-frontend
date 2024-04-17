@@ -77,10 +77,10 @@ const TotalObservationsOverTime = () => {
         },
       });
 
-      console.log('API Response:', response.data); // Log the raw API response
+      //   console.log('API Response:', response.data); // Log the raw API response
 
       const processedData = processData(response.data);
-      console.log('Processed Data:', processedData); // Log the processed data
+      //   console.log('Processed Data:', processedData); // Log the processed data
 
       setData(processedData);
 
@@ -90,11 +90,11 @@ const TotalObservationsOverTime = () => {
           Object.keys(item).filter((key) => key !== 'year')
         )
       );
-      console.log('State Provinces Set:', stateProvincesSet); // Log the stateProvinces set
+      // console.log('State Provinces Set:', stateProvincesSet); // Log the stateProvinces set
 
       setStateProvinces([...stateProvincesSet]);
     } catch (error) {
-      console.error('Error fetching data:', error);
+      // console.error('Error fetching data:', error);
     }
   };
 
