@@ -13,8 +13,8 @@ const HomePage = () => {
             </h1>
             <div className="bg-opacity-35 p-6 bg-[#5ba2ff] rounded-xl">
               <p className="text-lg lg:text-2xl mb-8 text-indigo-900 font-bold">
-                Discover the diversity of life with Nature Nexus. Explore,
-                analyze, and connect with global species data at your
+                Discover the diversity of birds in Austria with Nature Nexus. Explore,
+                analyze, and connect with species data at your
                 fingertips.
               </p>
               <div>

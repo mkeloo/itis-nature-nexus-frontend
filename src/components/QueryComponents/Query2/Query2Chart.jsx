@@ -10,27 +10,25 @@ const Query2Chart = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        if (startYear && endYear) {
-          const response = await fetch(`http://localhost:3000/api/query2?startYear=${startYear}&endYear=${endYear}`);
-          if (!response.ok) {
-            throw new Error('Failed to fetch data');
-          }
-          const result = await response.json();
-          console.log('called query2', result);
-          const dataWithRatio = result.map(entry => ({
-            ...entry,
-            BIODIVERSITY_TO_PRECIPITATION_RATIO: entry.BIODIVERSITY_SCORE / entry.PRECIPITATION_MEDIAN
-          }));
-          setData(dataWithRatio);
-          setNumTuples(result.length);
+        const response = await fetch(`http://localhost:3000/api/query2?startYear=${startYear}&endYear=${endYear}`);
+        if (!response.ok) {
+          throw new Error('Failed to fetch data');
         }
+        const result = await response.json();
+        console.log('called query2', result);
+        const dataWithRatio = result.map(entry => ({
+          ...entry,
+          BIODIVERSITY_TO_PRECIPITATION_RATIO: entry.BIODIVERSITY_SCORE / entry.PRECIPITATION_MEDIAN
+        }));
+        setData(dataWithRatio);
+        setNumTuples(result.length);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
     };
 
     fetchData();
-  }, [startYear, endYear]); // Trigger useEffect whenever startYear or endYear changes
+  }, [startYear, endYear]); 
 
   const handleStartYearChange = (e) => {
     setStartYear(e.target.value);
