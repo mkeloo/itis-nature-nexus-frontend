@@ -1,4 +1,8 @@
 import Query3Chart from '../components/QueryComponents/Query3/Query3Chart';
+import Query3Chart5 from '../components/QueryComponents/Query3/Query3Chart5';
+
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 
 const Page3 = () => {
   const [data, setData] = useState([]);
@@ -26,6 +30,7 @@ const Page3 = () => {
     <>
       <h1>Page3</h1>
       <Query3Chart />
+      <Query3Chart5 />
     </>
   );
 };
