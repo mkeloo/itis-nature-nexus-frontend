@@ -16,7 +16,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/query-example" element={<TrendQueryExamplePage />} />
+        {/* <Route path="/query-example" element={<TrendQueryExamplePage />} /> */}
         <Route path="/climate-correlation" element={<Page1 />} />
         <Route path="/biodiv-impact" element={<Page2 />} />
         <Route path="/observation-trends" element={<Page3 />} />

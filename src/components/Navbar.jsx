@@ -28,12 +28,12 @@ const Navbar = () => {
           >
             Home
           </Link> */}
-          <Link
+          {/* <Link
             to="/query-example"
             className="font-bold text-md text-white hover:text-green-400 hover:scale-110 duration-200 transition ease-in"
           >
             Ex Query 1
-          </Link>
+          </Link> */}
           <Link
             to="/climate-correlation"
             className="font-bold text-md text-white hover:text-green-400 hover:scale-110 duration-200 transition ease-in"

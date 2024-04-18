@@ -4,7 +4,7 @@ import SidebarQ5 from '../components/Sidebar/SidebarQ5';
 import ChartComponent from '../components/QueryComponents/Query5/ChartComponent';
 import DataTableComponent from '../components/QueryComponents/Query5/DataTableComponent';
 
-const Page5 = ({ queryTitle }) => {
+const Page5 = () => {
   const [query, setQuery] = useState({
     stateProvince: '',
     family: '',
@@ -36,7 +36,10 @@ const Page5 = ({ queryTitle }) => {
         />
         <div className="flex flex-col w-5/6 p-4">
           <ChartComponent query={query} />
-          <DataTableComponent query={query} queryNumber={5} />
+          <DataTableComponent
+            query={query}
+            queryEndpoint="http://localhost:3000/api/query5"
+          />
         </div>
       </div>
     </>

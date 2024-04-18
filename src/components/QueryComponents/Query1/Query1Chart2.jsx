@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Chart from 'react-google-charts';
 
-const ClimateBirdsComboChart = () => {
-  const [allData, setAllData] = useState([]);
+const ClimateBirdsComboChart = ({ query }) => {
   const [displayData, setDisplayData] = useState([]);
   const [yearRanges, setYearRanges] = useState([]);
   const [selectedRange, setSelectedRange] = useState('');
@@ -11,10 +10,17 @@ const ClimateBirdsComboChart = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/api/query1');
-        // Sort data by year
+        // Construct the query string using parameters from `query`
+        const params = new URLSearchParams({
+          stateProvince: query.stateProvince,
+          startYear: query.startYear,
+          endYear: query.endYear,
+        });
+
+        const response = await axios.get(
+          `http://localhost:3000/api/query1?${params}`
+        );
         const sortedData = response.data.sort((a, b) => a.YEAR - b.YEAR);
-        setAllData(sortedData);
         calculateYearRanges(sortedData);
       } catch (error) {
         console.error('Error fetching data', error);
@@ -22,7 +28,7 @@ const ClimateBirdsComboChart = () => {
     };
 
     fetchData();
-  }, []);
+  }, [query]); // React to changes in `query`
 
   const calculateYearRanges = (data) => {
     const years = data.map((item) => item.YEAR);
@@ -118,7 +124,7 @@ const ClimateBirdsComboChart = () => {
             2: { type: 'bars', targetAxisIndex: 1 },
             3: { type: 'bars', targetAxisIndex: 1 },
           },
-          colors: ['#e6f2ff', '#0040ff', '#ffab91', '#80cbc4'],
+          colors: ['#ff1100', '#0040ff', '#ffab91', '#80cbc4'],
           legend: { position: 'top', maxLines: 3 },
         }}
       />

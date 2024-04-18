@@ -21,67 +21,57 @@ const processDataForTreemap = (rawData) => {
     data.biodiversityIndexSum += item.BIODIVERSITY_INDEX;
     data.totalObservations += item.TOTAL_OBSERVATIONS;
     data.speciesCount += item.SPECIES_COUNT;
-    data.observationCountSum += item.OBSERVATION_COUNT; // Sum up the observation counts
+    data.observationCountSum += item.OBSERVATION_COUNT;
     data.count += 1;
   });
 
-  return Array.from(dataMap.values()).map((item, index, array) => ({
+  return Array.from(dataMap.values()).map((item) => ({
     name: item.name,
     biodiversityIndex: item.biodiversityIndexSum / item.count,
     totalObservations: item.totalObservations,
     speciesCount: item.speciesCount,
     observationCount: item.observationCountSum,
-    size: item.biodiversityIndexSum / item.count,
-    fill: generateColor(index, array.length), // Assign a color based on the index
+    size: item.biodiversityIndexSum / item.count, // size for the Treemap calculation
+    fill: generateColor(item.biodiversityIndexSum / item.count), // Assign a dynamic color
   }));
 };
 
-// Function to generate a color for each state province
-const generateColor = (index, total) => {
-  const hue = (index / total) * 360;
+const generateColor = (value) => {
+  const hue = (value * 360) % 360; // Simple dynamic color based on biodiversity index
   return `hsl(${hue}, 70%, 60%)`;
 };
 
-const BiodiversityTreemap = () => {
+const BiodiversityTreemap = ({ query }) => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       const response = await axios.get('http://localhost:3000/api/query4', {
-        params: {
-          startYear: 2010,
-          endYear: new Date().getFullYear(),
-        },
+        params: query,
       });
 
-      // Process the API response data for a treemap chart
       const processedData = processDataForTreemap(response.data);
       setData(processedData);
     };
 
     fetchData();
-  }, []);
-  // Process the data and assign a color to each state province
-  const coloredData = data.map((entry, index) => ({
-    ...entry,
-    fill: generateColor(index, data.length),
-  }));
+  }, [query]); // Dependency on query to update the chart when query parameters change
 
   return (
     <ResponsiveContainer width="100%" height={400}>
       <Treemap
-        data={coloredData}
+        data={data}
         dataKey="size"
-        aspectRatio={4 / 3}
+        ratio={4 / 3}
         stroke="#fff"
+        fill="#8884d8"
       >
-        <Tooltip cursor={false} content={<CustomTooltip />} />
+        <Tooltip content={<CustomTooltip />} />
       </Treemap>
     </ResponsiveContainer>
   );
 };
 
-// Custom tooltip component for treemap
 const CustomTooltip = ({ active, payload }) => {
   if (active && payload && payload.length) {
     const data = payload[0].payload;

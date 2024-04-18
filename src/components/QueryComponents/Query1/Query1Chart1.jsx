@@ -2,38 +2,34 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Chart } from 'react-google-charts';
 
-const AustriaBirdsGeoChart = () => {
+const AustriaBirdsGeoChart = ({ query }) => {
   const [data, setData] = useState([
     ['Province', 'Observations', { role: 'tooltip', p: { html: true } }],
   ]);
-  const [years, setYears] = useState([]);
-  const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
 
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await axios.get('http://localhost:3000/api/query1');
-        const uniqueYears = Array.from(
-          new Set(response.data.map((d) => d.YEAR))
+        // Construct the query string using parameters from `query`
+        const params = new URLSearchParams({
+          stateProvince: query.stateProvince,
+          startYear: query.startYear,
+          endYear: query.endYear,
+        });
+        const response = await axios.get(
+          `http://localhost:3000/api/query1?${params}`
         );
-        setYears(uniqueYears);
-        if (uniqueYears.includes(selectedYear)) {
-          setSelectedYear(selectedYear); // keep the selected year if it's in the new data
-        } else {
-          setSelectedYear(Math.max(...uniqueYears)); // update to the most recent year
-        }
 
-        const observationsForYear = response.data
-          .filter((item) => item.YEAR === selectedYear)
-          .map((item) => [
-            item.STATEPROVINCE,
-            item.OBSERVATION_COUNT,
-            `<strong>Observation Count:</strong> ${item.OBSERVATION_COUNT}<br /><strong>Species Count:</strong> ${item.SPECIES_COUNT}`,
-          ]);
+        // Process the response data to fit the GeoChart data format
+        const observationsData = response.data.map((item) => [
+          item.STATEPROVINCE,
+          item.OBSERVATION_COUNT,
+          `<strong>Observation Count:</strong> ${item.OBSERVATION_COUNT}<br /><strong>Species Count:</strong> ${item.SPECIES_COUNT}`,
+        ]);
 
         setData([
           ['Province', 'Observations', { role: 'tooltip', p: { html: true } }],
-          ...observationsForYear,
+          ...observationsData,
         ]);
       } catch (error) {
         console.error('Error fetching geo chart data', error);
@@ -41,24 +37,10 @@ const AustriaBirdsGeoChart = () => {
     }
 
     fetchData();
-  }, [selectedYear]);
-
-  const handleYearChange = (event) => {
-    setSelectedYear(Number(event.target.value));
-  };
+  }, [query]); // This ensures fetchData re-runs when query changes
 
   return (
     <div>
-      <label>
-        Select Year:
-        <select value={selectedYear} onChange={handleYearChange}>
-          {years.map((year) => (
-            <option key={year} value={year}>
-              {year}
-            </option>
-          ))}
-        </select>
-      </label>
       <Chart
         width={'100%'}
         height={'500px'}
