@@ -2,14 +2,22 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Chart } from 'react-google-charts';
 
-const AustriaConservationGeoChart = () => {
+const AustriaConservationGeoChart = ({ query }) => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/api/query5');
-        // Initialize a Map to keep track of province data
+        const queryString = Object.keys(query)
+          .map(
+            (key) =>
+              `${encodeURIComponent(key)}=${encodeURIComponent(query[key])}`
+          )
+          .join('&');
+
+        const response = await axios.get(
+          `http://localhost:3000/api/query5?${queryString}`
+        );
         const provinceDataMap = new Map();
 
         response.data.forEach((record) => {
@@ -28,7 +36,6 @@ const AustriaConservationGeoChart = () => {
           provinceData.uniqueGenera.add(record.GENUS);
         });
 
-        // Convert Map data to array format for the chart
         const chartData = [
           [
             'Province',
@@ -39,12 +46,11 @@ const AustriaConservationGeoChart = () => {
         provinceDataMap.forEach((value, key) => {
           const threatenedPercentage =
             (value.threatenedSpecies / value.numberOfSpecies) * 100;
-          // Create tooltip content
           const tooltipContent = `<div style="margin: 0; padding: 0;">
-                                  Threatened Species: <strong>${value.threatenedSpecies}</strong><br>
-                                  No. of Species: <strong>${value.numberOfSpecies}</strong><br>
-                                  Unique Families: <strong>${value.uniqueFamilies.size}</strong><br>
-                                  Unique Genera: <strong>${value.uniqueGenera.size}</strong></div>`;
+                                    Threatened Species: <strong>${value.threatenedSpecies}</strong><br>
+                                    No. of Species: <strong>${value.numberOfSpecies}</strong><br>
+                                    Unique Families: <strong>${value.uniqueFamilies.size}</strong><br>
+                                    Unique Genera: <strong>${value.uniqueGenera.size}</strong></div>`;
           chartData.push([key, threatenedPercentage, tooltipContent]);
         });
 
@@ -55,7 +61,7 @@ const AustriaConservationGeoChart = () => {
     };
 
     fetchData();
-  }, []);
+  }, [query]); // Listen to changes in `query`
 
   return (
     <Chart

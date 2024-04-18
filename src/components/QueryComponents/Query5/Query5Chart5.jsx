@@ -21,13 +21,22 @@ function showFullTooltip(data) {
   };
 }
 
-const TreeMapConservationChart = () => {
+const TreeMapConservationChart = ({ query }) => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/api/query5');
+        const queryString = Object.keys(query)
+          .map(
+            (key) =>
+              `${encodeURIComponent(key)}=${encodeURIComponent(query[key])}`
+          )
+          .join('&');
+
+        const response = await axios.get(
+          `http://localhost:3000/api/query5?${queryString}`
+        );
         const processedData = [
           ['ID', 'Parent', 'Number of Species', 'Threatened Percentage'],
         ];
@@ -74,7 +83,7 @@ const TreeMapConservationChart = () => {
     };
 
     fetchData();
-  }, []);
+  }, [query]); // Re-fetch data when query changes
 
   return (
     <Chart
