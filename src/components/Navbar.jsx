@@ -47,10 +47,10 @@ const Navbar = () => {
             Biodiversity & Climate
           </Link>
           <Link
-            to="/seasonal-trends"
+            to="/observation-trends"
             className="font-bold text-md text-white hover:text-green-400 hover:scale-110 duration-200 transition ease-in"
           >
-            Seasonal Trends
+            Observation Trends
           </Link>
           <Link
             to="/long-term-trends"
