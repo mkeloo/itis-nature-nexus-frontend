@@ -14,18 +14,58 @@ function ChartComponent() {
   };
 
   return (
-    <div>
-      <button onClick={() => handleClick(1)}>1</button>
-      <button onClick={() => handleClick(2)}>2</button>
-      <button onClick={() => handleClick(3)}>3</button>
-      <button onClick={() => handleClick(4)}>4</button>
-      <button onClick={() => handleClick(5)}>5</button>
-
-      {currentPage === 1 && <Query5Chart />}
-      {currentPage === 2 && <Query5Chart2 />}
-      {currentPage === 3 && <Query5Chart3 />}
-      {currentPage === 4 && <Query5Chart4 />}
-      {currentPage === 5 && <Query5Chart5 />}
+    <div className="flex flex-col items-center">
+      <div className="w-full flex justify-center">
+        <div className="w-full">
+          {currentPage === 1 && <Query5Chart />}
+          {currentPage === 2 && <Query5Chart2 />}
+          {currentPage === 3 && <Query5Chart3 />}
+          {currentPage === 4 && <Query5Chart4 />}
+          {currentPage === 5 && <Query5Chart5 />}
+        </div>
+      </div>
+      <div className="mt-4">
+        <button
+          onClick={() => handleClick(1)}
+          className={`px-3 py-1 border rounded ${
+            currentPage === 1 ? 'bg-blue-500 text-white' : 'bg-gray-200'
+          }`}
+        >
+          1
+        </button>
+        <button
+          onClick={() => handleClick(2)}
+          className={`px-3 py-1 border rounded ${
+            currentPage === 2 ? 'bg-blue-500 text-white' : 'bg-gray-200'
+          }`}
+        >
+          2
+        </button>
+        <button
+          onClick={() => handleClick(3)}
+          className={`px-3 py-1 border rounded ${
+            currentPage === 3 ? 'bg-blue-500 text-white' : 'bg-gray-200'
+          }`}
+        >
+          3
+        </button>
+        <button
+          onClick={() => handleClick(4)}
+          className={`px-3 py-1 border rounded ${
+            currentPage === 4 ? 'bg-blue-500 text-white' : 'bg-gray-200'
+          }`}
+        >
+          4
+        </button>
+        <button
+          onClick={() => handleClick(5)}
+          className={`px-3 py-1 border rounded ${
+            currentPage === 5 ? 'bg-blue-500 text-white' : 'bg-gray-200'
+          }`}
+        >
+          5
+        </button>
+      </div>
     </div>
   );
 }

@@ -33,9 +33,10 @@ const MainPage = ({ queryTitle }) => {
           onSubmit={handleSubmit}
           displayQuery={displayQuery}
         />
-        <div className="flex flex-col w-5/6 p-4 justify-center items-center">
-          {/* <ChartComponent chartData=Pass chart data here /> */}
-          <ChartComponent />
+        <div className="flex flex-col w-5/6 p-4">
+          <div className="h-full">
+            <ChartComponent />
+          </div>
           <DataTableComponent queryNumber={5} />
         </div>
       </div>
