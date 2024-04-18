@@ -10,15 +10,15 @@ import {
   Legend,
 } from 'recharts';
 
-// https://chat.openai.com/share/0e7629c2-00fd-47b1-b3c4-ebdfeaf778a0
-
 const Query1Chart = () => {
   const [data, setData] = useState([]);
+  const [startYear, setStartYear] = useState('');
+  const [endYear, setEndYear] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/api/query1');
+        const response = await axios.get(`http://localhost:3000/api/query1?startYear=${startYear}&endYear=${endYear}`);
         setData(response.data);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -26,10 +26,40 @@ const Query1Chart = () => {
     };
 
     fetchData();
-  }, []);
+  }, [startYear, endYear]);
+
+  const handleStartYearChange = (e) => {
+    setStartYear(e.target.value);
+  };
+
+  const handleEndYearChange = (e) => {
+    setEndYear(e.target.value);
+  };
 
   return (
     <div>
+      <div>
+        <label htmlFor="startYear">Start Year:</label>
+        <select id="startYear" value={startYear} onChange={handleStartYearChange}>
+          <option value="">Select Start Year</option>
+          {Array.from({ length: 2023 - 1950 }, (_, index) => {
+            const year = 1950 + index;
+            return <option key={year} value={year}>{year}</option>;
+          })}
+        </select>
+      </div>
+      <div>
+        <label htmlFor="endYear">End Year:</label>
+        <select id="endYear" value={endYear} onChange={handleEndYearChange}>
+          <option value="">Select End Year</option>
+          {Array.from({ length: 2023 - 1950 }, (_, index) => {
+            const year = 1950 + index;
+            return <option key={year} value={year}>{year}</option>;
+          })}
+        </select>
+      </div>
+      <div>Total tuples: {data.length}</div>
+
       <h2>
         Bird Species Count, Precipitation, and Temperature Trends Over Time
       </h2>
