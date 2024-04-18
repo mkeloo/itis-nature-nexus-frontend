@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import { LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid, Legend } from 'recharts';
 
 const Query2Chart = () => {
@@ -10,11 +11,11 @@ const Query2Chart = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`http://localhost:3000/api/query2?startYear=${startYear}&endYear=${endYear}`);
-        if (!response.ok) {
+        const response = await axios.get(`http://localhost:3000/api/query2?startYear=${startYear}&endYear=${endYear}`);
+        if (!response.data) {
           throw new Error('Failed to fetch data');
         }
-        const result = await response.json();
+        const result = response.data;
         console.log('called query2', result);
         const dataWithRatio = result.map(entry => ({
           ...entry,
@@ -91,7 +92,6 @@ const Query2Chart = () => {
         <Legend />
         <Line type="monotone" dataKey="BIODIVERSITY_SCORE" stroke="#8884d8" name="Biodiversity Score" />
       </LineChart>
-
     </div>
   );
 };

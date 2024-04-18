@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import {
-  LineChart,
-  Line,
+  ScatterChart,
+  Scatter,
   XAxis,
   YAxis,
   CartesianGrid,
@@ -66,7 +66,7 @@ const Query3Chart = () => {
         </select>
       </div>
       <div>
-        <label htmlFor="growthRateThreshold">Growth Rate Threshold (e.g. 50% increase or decrease):</label>
+        <label htmlFor="growthRateThreshold">Growth Rate Threshold:</label>
         <select id="growthRateThreshold" value={growthRateThreshold} onChange={handleGrowthRateThresholdChange}>
           {Array.from({ length: 21 }, (_, index) => {
             const threshold = (index / 20).toFixed(2);
@@ -80,19 +80,18 @@ const Query3Chart = () => {
       ) : (
         <div>
           <h2>Bird Species Growth Rates Over Time</h2>
-          <LineChart
+          <ScatterChart
             width={1200}
             height={600}
-            data={data}
             margin={{ top: 20, right: 30, left: 20, bottom: 10 }}
           >
             <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="YEAR" />
+            <XAxis dataKey="YEAR" interval="preserveStart" />
             <YAxis />
             <Tooltip />
             <Legend />
-            <Line type="monotone" dataKey="GROWTH_RATE_PERCENTAGE" stroke="#8884d8" name="Growth Rate Percentage" />
-          </LineChart>
+            <Scatter name="Growth Rate Percentage" data={data} fill="#8884d8" />
+          </ScatterChart>
         </div>
       )}
     </div>
