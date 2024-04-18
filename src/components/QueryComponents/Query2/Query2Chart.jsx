@@ -60,7 +60,6 @@ const Query2Chart = () => {
           })}
         </select>
       </div>
-      <div>Total tuples: {numTuples}</div>
       
       <h2>Biodiversity Index and Temperature Median Over Time</h2>
       <LineChart width={1200} height={600} data={data}>
