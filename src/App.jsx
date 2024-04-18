@@ -18,7 +18,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/query-example" element={<TrendQueryExamplePage />} />
         <Route path="/climate-correlation" element={<Page1 />} />
-        <Route path="/urbanization-impact" element={<Page2 />} />
+        <Route path="/biodiv-impact" element={<Page2 />} />
         <Route path="/seasonal-trends" element={<Page3 />} />
         <Route path="/long-term-trends" element={<Page4 />} />
         <Route path="/conservation-impact" element={<Page5 />} />
