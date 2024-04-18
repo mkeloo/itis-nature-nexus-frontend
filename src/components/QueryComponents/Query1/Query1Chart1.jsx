@@ -1,60 +1,81 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-} from 'recharts';
+import { Chart } from 'react-google-charts';
 
-// https://chat.openai.com/share/0e7629c2-00fd-47b1-b3c4-ebdfeaf778a0
-
-const Query1Chart = () => {
-  const [data, setData] = useState([]);
+const AustriaBirdsGeoChart = () => {
+  const [data, setData] = useState([
+    ['Province', 'Observations', { role: 'tooltip', p: { html: true } }],
+  ]);
+  const [years, setYears] = useState([]);
+  const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
 
   useEffect(() => {
-    const fetchData = async () => {
+    async function fetchData() {
       try {
         const response = await axios.get('http://localhost:3000/api/query1');
-        setData(response.data);
+        const uniqueYears = Array.from(
+          new Set(response.data.map((d) => d.YEAR))
+        );
+        setYears(uniqueYears);
+        if (uniqueYears.includes(selectedYear)) {
+          setSelectedYear(selectedYear); // keep the selected year if it's in the new data
+        } else {
+          setSelectedYear(Math.max(...uniqueYears)); // update to the most recent year
+        }
+
+        const observationsForYear = response.data
+          .filter((item) => item.YEAR === selectedYear)
+          .map((item) => [
+            item.STATEPROVINCE,
+            item.OBSERVATION_COUNT,
+            `<strong>Observation Count:</strong> ${item.OBSERVATION_COUNT}<br /><strong>Species Count:</strong> ${item.SPECIES_COUNT}`,
+          ]);
+
+        setData([
+          ['Province', 'Observations', { role: 'tooltip', p: { html: true } }],
+          ...observationsForYear,
+        ]);
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error('Error fetching geo chart data', error);
       }
-    };
+    }
 
     fetchData();
-  }, []);
+  }, [selectedYear]);
+
+  const handleYearChange = (event) => {
+    setSelectedYear(Number(event.target.value));
+  };
 
   return (
     <div>
-      <h2>
-        Bird Species Count, Precipitation, and Temperature Trends Over Time
-      </h2>
-      <LineChart
-        width={800}
-        height={400}
+      <label>
+        Select Year:
+        <select value={selectedYear} onChange={handleYearChange}>
+          {years.map((year) => (
+            <option key={year} value={year}>
+              {year}
+            </option>
+          ))}
+        </select>
+      </label>
+      <Chart
+        width={'100%'}
+        height={'500px'}
+        chartType="GeoChart"
         data={data}
-        margin={{ top: 20, right: 30, left: 20, bottom: 10 }}
-      >
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="YEAR" />
-        <YAxis />
-        <Tooltip />
-        <Legend />
-        <Line
-          type="monotone"
-          dataKey="SPECIES_COUNT"
-          stroke="#8884d8"
-          activeDot={{ r: 8 }}
-        />
-        <Line type="monotone" dataKey="PRECIPITATION" stroke="#82ca9d" />
-        <Line type="monotone" dataKey="AVG_TEMPERATURE" stroke="#ffc658" />
-      </LineChart>
+        options={{
+          region: 'AT', // Austria
+          resolution: 'provinces',
+          colorAxis: { colors: ['#e6f2ff', '#0040ff'] },
+          defaultColor: '#f5f5f5',
+          tooltip: { isHtml: true },
+        }}
+        mapsApiKey={import.meta.env.VITE_APP_GOOGLE_MAPS_API_KEY}
+        rootProps={{ 'data-testid': '1' }}
+      />
     </div>
   );
 };
 
-export default Query1Chart;
+export default AustriaBirdsGeoChart;
