@@ -35,6 +35,7 @@ const MainPage = ({ queryTitle }) => {
         />
         <div className="flex flex-col w-5/6 p-4 justify-center items-center">
           {/* <ChartComponent chartData=Pass chart data here /> */}
+          <ChartComponent />
           <DataTableComponent tableData={tableData} />
         </div>
       </div>
