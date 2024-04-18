@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import TitleComponent5 from '../components/QueryComponents/Query5/TitleComponent5';
 import SidebarQ5 from '../components/Sidebar/SidebarQ5';
-import ChartComponent from '../components/PageComponents/ChartComponent';
-import DataTableComponent from '../components/PageComponents/DataTableComponent';
+import ChartComponent from '../components/QueryComponents/Query5/ChartComponent';
+import DataTableComponent from '../components/QueryComponents/Query5/DataTableComponent';
 
 const Page5 = ({ queryTitle }) => {
   const [query, setQuery] = useState({

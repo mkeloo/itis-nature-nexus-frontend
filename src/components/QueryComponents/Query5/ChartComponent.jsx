@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import Query5Chart from '../QueryComponents/Query5/Query5Chart.jsx';
-import Query5Chart2 from '../QueryComponents/Query5/Query5Chart2.jsx';
-import Query5Chart3 from '../QueryComponents/Query5/Query5Chart3.jsx';
-import Query5Chart4 from '../QueryComponents/Query5/Query5Chart4.jsx';
-import Query5Chart5 from '../QueryComponents/Query5/Query5Chart5.jsx';
+import Query5Chart from '../Query5/Query5Chart.jsx';
+import Query5Chart2 from '../Query5/Query5Chart2.jsx';
+import Query5Chart3 from '../Query5/Query5Chart3.jsx';
+import Query5Chart4 from '../Query5/Query5Chart4.jsx';
+import Query5Chart5 from '../Query5/Query5Chart5.jsx';
 
 function ChartComponent({ query }) {
   const [currentPage, setCurrentPage] = useState(1);
