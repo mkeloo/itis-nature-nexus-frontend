@@ -1,14 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+} from 'recharts';
 
-const Query3LineChart = () => {
+const Query3LineChart = ({ query }) => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/api/query3');
+        // Pass query parameters directly to the API call
+        const response = await axios.get('http://localhost:3000/api/query3', {
+          params: query,
+        });
         const processedData = processData(response.data);
         setData(processedData);
       } catch (error) {
@@ -17,26 +28,23 @@ const Query3LineChart = () => {
     };
 
     fetchData();
-  }, []);
+  }, [query]); // Rerun the effect if query params change
 
   const processData = (rawData) => {
-    // Group data by year and calculate mean growth rate
     const groupedData = rawData.reduce((acc, cur) => {
       if (!acc[cur.YEAR]) {
         acc[cur.YEAR] = { YEAR: cur.YEAR, sum: 0, count: 0 };
       }
-      acc[cur.YEAR].sum += cur.GROWTH_RATE_PERCENTAGE;
+      acc[cur.YEAR].sum += cur.GROWTH_RATE;
       acc[cur.YEAR].count++;
       return acc;
     }, {});
 
-    // Calculate mean growth rate for each year
-    const processedData = Object.values(groupedData).map((entry) => ({
+    // Calculate the mean growth rate for each year
+    return Object.values(groupedData).map((entry) => ({
       YEAR: entry.YEAR,
       'Mean Growth Rate': entry.sum / entry.count,
     }));
-
-    return processedData;
   };
 
   return (
@@ -52,11 +60,20 @@ const Query3LineChart = () => {
       }}
     >
       <CartesianGrid strokeDasharray="3 3" />
-      <XAxis dataKey="YEAR" label={{ value: 'Year', position: 'bottom' }} />
-      <YAxis label={{ value: 'Mean Growth Rate', angle: -90, position: 'insideLeft' }} />
+      <XAxis
+        dataKey="YEAR"
+        label={{ value: 'Year', position: 'insideBottomRight', offset: -10 }}
+      />
+      <YAxis
+        label={{
+          value: 'Mean Growth Rate (%)',
+          angle: -90,
+          position: 'insideLeft',
+        }}
+      />
       <Tooltip />
-      <Legend layout="vertical" align="right" verticalAlign="middle" />
-      <Line type="monotone" dataKey="Mean Growth Rate" name="Mean Growth Rate" stroke="#82ca9d" />
+      <Legend />
+      <Line type="monotone" dataKey="Mean Growth Rate" stroke="#82ca9d" />
     </LineChart>
   );
 };
