@@ -1,33 +1,36 @@
-// MainPage.js
+// Page5.jsx
 import React, { useState } from 'react';
 import TitleComponent5 from '../components/QueryComponents/Query5/TitleComponent5';
-import SidebarComponent from '../components/PageComponents/SidebarComponent';
+import SidebarQ5 from '../components/Sidebar/SidebarQ5';
 import ChartComponent from '../components/PageComponents/ChartComponent';
 import DataTableComponent from '../components/PageComponents/DataTableComponent';
 
-const MainPage = ({ queryTitle }) => {
+const Page5 = ({ queryTitle }) => {
   const [query, setQuery] = useState({
     // Default query parameters
+    param1: '',
+    // Add more default parameters if needed
   });
   const [displayQuery, setDisplayQuery] = useState('');
 
   const handleInputChange = (e) => {
     // Handle input change
+    const { name, value } = e.target;
+    setQuery({ ...query, [name]: value });
   };
 
   const handleSubmit = (e) => {
     // Handle form submission
+    e.preventDefault();
+    // Your submission logic here
   };
-
-  const tableData = [
-    // Placeholder data
-  ];
 
   return (
     <>
       <TitleComponent5 />
       <div className="flex flex-row min-h-screen bg-gray-100">
-        <SidebarComponent
+        {/* Pass specific query-related props to SidebarQ5 */}
+        <SidebarQ5
           query={query}
           onInputChange={handleInputChange}
           onSubmit={handleSubmit}
@@ -44,4 +47,4 @@ const MainPage = ({ queryTitle }) => {
   );
 };
 
-export default MainPage;
+export default Page5;
