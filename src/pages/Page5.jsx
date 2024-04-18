@@ -1,29 +1,45 @@
-import Query5Chart from '../components/QueryComponents/Query5/Query5Chart';
-import Query5Chart2 from '../components/QueryComponents/Query5/Query5Chart2';
-import Query5Chart3 from '../components/QueryComponents/Query5/Query5Chart3';
-import Query5Chart4 from '../components/QueryComponents/Query5/Query5Chart4';
-import Query5Chart5 from '../components/QueryComponents/Query5/Query5Chart5';
+// MainPage.js
+import React, { useState } from 'react';
+import TitleComponent from '../components/PageComponents/TitleComponent.jsx';
+import SidebarComponent from '../components/PageComponents/SidebarComponent';
+import ChartComponent from '../components/PageComponents/ChartComponent';
+import DataTableComponent from '../components/PageComponents/DataTableComponent';
 
-const Page1 = () => {
+const MainPage = ({ queryTitle }) => {
+  const [query, setQuery] = useState({
+    // Default query parameters
+  });
+  const [displayQuery, setDisplayQuery] = useState('');
+
+  const handleInputChange = (e) => {
+    // Handle input change
+  };
+
+  const handleSubmit = (e) => {
+    // Handle form submission
+  };
+
+  const tableData = [
+    // Placeholder data
+  ];
+
   return (
     <>
-      <h1>Page5</h1>
-      <div className="m-2 mx-4">
-        <Query5Chart4 />
+      <TitleComponent title={queryTitle} />
+      <div className="flex flex-row min-h-screen bg-gray-100">
+        <SidebarComponent
+          query={query}
+          onInputChange={handleInputChange}
+          onSubmit={handleSubmit}
+          displayQuery={displayQuery}
+        />
+        <div className="flex flex-col w-5/6 p-4 justify-center items-center">
+          {/* <ChartComponent chartData=Pass chart data here /> */}
+          <DataTableComponent tableData={tableData} />
+        </div>
       </div>
-      <div className="m-2 mx-4">
-        <Query5Chart5 />
-      </div>
-      <div className="m-2 mx-4">
-        <Query5Chart />
-      </div>
-      <div className="m-2 mx-4">
-        <Query5Chart2 />
-      </div>
-      {/* <div className="m-2 mx-4">
-        <Query5Chart3 />
-      </div> */}
     </>
   );
 };
-export default Page1;
+
+export default MainPage;

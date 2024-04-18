@@ -41,9 +41,8 @@ const AustriaConservationGeoChart = () => {
             (value.threatenedSpecies / value.numberOfSpecies) * 100;
           // Create tooltip content
           const tooltipContent = `<div style="margin: 0; padding: 0;">
-                                  <strong>${key}</strong><br>
                                   Threatened Species: <strong>${value.threatenedSpecies}</strong><br>
-                                  Number of Species: <strong>${value.numberOfSpecies}</strong><br>
+                                  No. of Species: <strong>${value.numberOfSpecies}</strong><br>
                                   Unique Families: <strong>${value.uniqueFamilies.size}</strong><br>
                                   Unique Genera: <strong>${value.uniqueGenera.size}</strong></div>`;
           chartData.push([key, threatenedPercentage, tooltipContent]);
@@ -71,7 +70,7 @@ const AustriaConservationGeoChart = () => {
         defaultColor: '#f5f5f5',
         tooltip: { isHtml: true },
       }}
-      mapsApiKey={import.meta.env.VITE_APP_GOOGLE_MAPS_API_KEY} // Replace with your actual API key
+      mapsApiKey={import.meta.env.VITE_APP_GOOGLE_MAPS_API_KEY}
       rootProps={{ 'data-testid': '1' }}
     />
   );
