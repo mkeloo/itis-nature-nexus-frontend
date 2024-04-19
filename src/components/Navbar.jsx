@@ -7,18 +7,22 @@ const Navbar = () => {
     <nav className="bg-indigo-950 text-white p-4">
       <div className="container mx-auto flex justify-between items-center">
         {/* Logo Section */}
-        <div className="flex items-center">
-          <img src={logo} alt="Logo" className="h-12 mr-2" />
-          {/* <span>Nature Nexus</span> */}
-          <div className="">
-            <span className="block font-bold text-2xl leading-none bg-gradient-to-r from-green-200 to-green-500 text-transparent bg-clip-text hover:cursor-pointer">
-              Nature
-            </span>
-            <span className="block font-bold text-2xl leading-none bg-gradient-to-r from-green-200 to-green-500 text-transparent bg-clip-text hover:cursor-pointer">
-              Nexus
-            </span>
+
+        {/* Logo Section */}
+        <Link to="/">
+          <div className="flex items-center">
+            <img src={logo} alt="Logo" className="h-12 mr-2" />
+            {/* <span>Nature Nexus</span> */}
+            <div className="">
+              <span className="block font-bold text-2xl leading-none bg-gradient-to-r from-green-200 to-green-500 text-transparent bg-clip-text hover:cursor-pointer">
+                Nature
+              </span>
+              <span className="block font-bold text-2xl leading-none bg-gradient-to-r from-green-200 to-green-500 text-transparent bg-clip-text hover:cursor-pointer">
+                Nexus
+              </span>
+            </div>
           </div>
-        </div>
+        </Link>
 
         {/* Navigation Links */}
         <div className="hidden md:flex space-x-4">
