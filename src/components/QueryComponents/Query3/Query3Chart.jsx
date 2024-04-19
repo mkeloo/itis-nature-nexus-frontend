@@ -13,12 +13,10 @@ import {
 
 const Query3Chart = ({ query }) => {
   const [data, setData] = useState([]);
-  const [activePoint, setActivePoint] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Use the query object directly to pass parameters to the API
         const response = await axios.get('http://localhost:3000/api/query3', {
           params: query,
         });
@@ -31,12 +29,24 @@ const Query3Chart = ({ query }) => {
     fetchData();
   }, [query]); // Dependency on query to refetch data when query parameters change
 
-  const handleMouseEnter = (point) => {
-    setActivePoint(point);
-  };
+  // You need to extract the selected year range from the query object
+  const startYear = query.startYear;
+  const endYear = query.endYear;
 
-  const handleMouseLeave = () => {
-    setActivePoint(null);
+  // Custom Tooltip component to show details on hover
+  const CustomTooltip = ({ active, payload, label }) => {
+    if (active && payload && payload.length) {
+      const data = payload[0].payload;
+      return (
+        <div className="custom-tooltip">
+          <p>{`Bird Species: ${data.SCIENTIFICNAME}`}</p>
+          <p>{`Year: ${data.YEAR}`}</p>
+          <p>{`Growth Rate: ${data.GROWTH_RATE_PERCENTAGE.toFixed(2)}%`}</p>
+          <p>{`Observation Count: ${data.OBSERVATION_COUNT}`}</p>
+        </div>
+      );
+    }
+    return null;
   };
 
   return (
@@ -57,7 +67,8 @@ const Query3Chart = ({ query }) => {
           type="number"
           dataKey="YEAR"
           name="Year"
-          domain={['dataMin', 'dataMax']}
+          // Set the domain dynamically based on the selected year range
+          domain={[startYear, endYear]}
         >
           <Label value="Year" position="bottom" />
         </XAxis>
@@ -65,42 +76,24 @@ const Query3Chart = ({ query }) => {
           type="number"
           dataKey="GROWTH_RATE_PERCENTAGE"
           name="Growth Rate (%)"
-          domain={[-100, 100]}
+          domain={['auto', 'auto']}
         >
           <Label value="Growth Rate (%)" position="left" angle={-90} />
         </YAxis>
         <Tooltip
           cursor={{ strokeDasharray: '3 3' }}
-          content={<CustomTooltip activePoint={activePoint} />}
+          content={<CustomTooltip />}
         />
         <Legend />
         <Scatter
           name="Bird Observations"
           data={data}
           fill="#8884d8"
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
+          shape="circle"
+          cx="20"
+          cy="20"
         />
       </ScatterChart>
-    </div>
-  );
-};
-
-const CustomTooltip = ({ activePoint }) => {
-  if (!activePoint) return null;
-
-  const { payload } = activePoint;
-  if (!payload || payload.length === 0) return null;
-
-  const { SCIENTIFICNAME, YEAR, GROWTH_RATE_PERCENTAGE, OBSERVATION_COUNT } =
-    payload[0].payload;
-
-  return (
-    <div className="custom-tooltip">
-      <p>{`Bird Species: ${SCIENTIFICNAME}`}</p>
-      <p>{`Year: ${YEAR}`}</p>
-      <p>{`Growth Rate: ${GROWTH_RATE_PERCENTAGE.toFixed(2)}%`}</p>
-      <p>{`Observation Count: ${OBSERVATION_COUNT}`}</p>
     </div>
   );
 };

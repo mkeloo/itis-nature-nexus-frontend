@@ -16,9 +16,8 @@ const Query3LineChart = ({ query }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Pass query parameters directly to the API call
         const response = await axios.get('http://localhost:3000/api/query3', {
-          params: query,
+          params: query, // Ensure the query includes startYear and endYear
         });
         const processedData = processData(response.data);
         setData(processedData);
@@ -28,14 +27,15 @@ const Query3LineChart = ({ query }) => {
     };
 
     fetchData();
-  }, [query]); // Rerun the effect if query params change
+  }, [query]); // Dependency array includes the query prop to refetch when it changes
 
   const processData = (rawData) => {
+    // Data processing logic remains the same, assuming it's correct
     const groupedData = rawData.reduce((acc, cur) => {
       if (!acc[cur.YEAR]) {
         acc[cur.YEAR] = { YEAR: cur.YEAR, sum: 0, count: 0 };
       }
-      acc[cur.YEAR].sum += cur.GROWTH_RATE;
+      acc[cur.YEAR].sum += cur.GROWTH_RATE_PERCENTAGE;
       acc[cur.YEAR].count++;
       return acc;
     }, {});
@@ -73,7 +73,7 @@ const Query3LineChart = ({ query }) => {
       />
       <Tooltip />
       <Legend />
-      <Line type="monotone" dataKey="Mean Growth Rate" stroke="#82ca9d" />
+      <Line type="monotone" dataKey="Mean Growth Rate" stroke="#013220" />
     </LineChart>
   );
 };
