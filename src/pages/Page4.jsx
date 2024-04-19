@@ -7,9 +7,9 @@ import DataTableComponent from '../components/QueryComponents/Query4/DataTableCo
 const Page4 = () => {
   const [query, setQuery] = useState({
     stateProvince: '',
-    startYear: 2015,
+    startYear: 2019,
     endYear: new Date().getFullYear(),
-    orderBy: 'year ASC',
+    orderBy: 'observation_count DESC',
   });
 
   const handleInputChange = (e) => {
