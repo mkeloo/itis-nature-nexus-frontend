@@ -51,10 +51,10 @@ const Query3Chart = ({ query }) => {
 
   return (
     <div>
-      <h2 style={{ textAlign: 'center' }}>Bird Observations Growth Rate</h2>
+      {/* <h2 style={{ textAlign: 'center' }}>Bird Observations Growth Rate</h2> */}
       <ScatterChart
-        width={800}
-        height={600}
+        width={1100}
+        height={500}
         margin={{
           top: 20,
           right: 20,
@@ -90,8 +90,8 @@ const Query3Chart = ({ query }) => {
           data={data}
           fill="#8884d8"
           shape="circle"
-          cx="20"
-          cy="20"
+          cx="40"
+          cy="40"
         />
       </ScatterChart>
     </div>
