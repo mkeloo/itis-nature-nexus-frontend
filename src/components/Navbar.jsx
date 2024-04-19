@@ -50,7 +50,7 @@ const Navbar = () => {
             to="/conservation-impact"
             className="font-bold text-md text-white hover:text-green-400 hover:scale-110 duration-200 transition ease-in"
           >
-            Conservation
+            Conservation Trends
           </Link>
         </div>
 
