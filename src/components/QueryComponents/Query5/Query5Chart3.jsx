@@ -23,7 +23,6 @@ const processData = (rawData) => {
     familyMap.get(FAMILY).threatened += THREATENEDSPECIES;
   });
 
-  // Filter out families with no threatened species
   return Array.from(familyMap)
     .map(([family, counts]) => ({
       family: family,

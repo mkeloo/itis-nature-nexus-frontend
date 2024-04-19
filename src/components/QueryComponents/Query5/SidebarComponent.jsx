@@ -1,7 +1,6 @@
 import React from 'react';
 
 const SidebarComponent = ({ query, onInputChange, onSubmit, displayQuery }) => {
-  // List of Austrian state provinces for the dropdown
   const stateProvinces = [
     'Wien',
     'Niederösterreich',
@@ -14,11 +13,9 @@ const SidebarComponent = ({ query, onInputChange, onSubmit, displayQuery }) => {
     'Steiermark',
   ];
 
-  // OrderBy options for the dropdown
   const orderByOptions = [
     { value: 'ThreatenedPercentage DESC', text: 'Threatened - Descending' },
     { value: 'ThreatenedPercentage ASC', text: 'Threatened - Ascending' },
-    // Add more ordering options as needed
   ];
 
   return (

@@ -30,7 +30,6 @@ function ChartComponent({ query }) {
         <div className="w-full">{renderChart()}</div>
       </div>
       <div className="mt-4">
-        {/* Buttons for page switching */}
         {[1, 2, 3].map((pageNumber) => (
           <button
             key={pageNumber}

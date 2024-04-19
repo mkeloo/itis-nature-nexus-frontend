@@ -31,13 +31,13 @@ const processDataForTreemap = (rawData) => {
     totalObservations: item.totalObservations,
     speciesCount: item.speciesCount,
     observationCount: item.observationCountSum,
-    size: item.biodiversityIndexSum / item.count, // size for the Treemap calculation
-    fill: generateColor(item.biodiversityIndexSum / item.count), // Assign a dynamic color
+    size: item.biodiversityIndexSum / item.count,
+    fill: generateColor(item.biodiversityIndexSum / item.count),
   }));
 };
 
 const generateColor = (value) => {
-  const hue = (value * 360) % 360; // Simple dynamic color based on biodiversity index
+  const hue = (value * 360) % 360;
   return `hsl(${hue}, 70%, 60%)`;
 };
 
@@ -55,7 +55,7 @@ const BiodiversityTreemap = ({ query }) => {
     };
 
     fetchData();
-  }, [query]); // Dependency on query to update the chart when query parameters change
+  }, [query]);
 
   return (
     <ResponsiveContainer width="100%" height={400}>

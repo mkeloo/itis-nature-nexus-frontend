@@ -61,7 +61,7 @@ const AustriaConservationGeoChart = ({ query }) => {
     };
 
     fetchData();
-  }, [query]); // Listen to changes in `query`
+  }, [query]);
 
   return (
     <Chart

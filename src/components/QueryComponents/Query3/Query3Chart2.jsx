@@ -17,7 +17,7 @@ const Query3LineChart = ({ query }) => {
     const fetchData = async () => {
       try {
         const response = await axios.get('http://localhost:3000/api/query3', {
-          params: query, // Ensure the query includes startYear and endYear
+          params: query,
         });
         const processedData = processData(response.data);
         setData(processedData);
@@ -27,10 +27,9 @@ const Query3LineChart = ({ query }) => {
     };
 
     fetchData();
-  }, [query]); // Dependency array includes the query prop to refetch when it changes
+  }, [query]);
 
   const processData = (rawData) => {
-    // Data processing logic remains the same, assuming it's correct
     const groupedData = rawData.reduce((acc, cur) => {
       if (!acc[cur.YEAR]) {
         acc[cur.YEAR] = { YEAR: cur.YEAR, sum: 0, count: 0 };
@@ -40,7 +39,6 @@ const Query3LineChart = ({ query }) => {
       return acc;
     }, {});
 
-    // Calculate the mean growth rate for each year
     return Object.values(groupedData).map((entry) => ({
       YEAR: entry.YEAR,
       'Mean Growth Rate': entry.sum / entry.count,

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import TitleComponent1 from '../components/QueryComponents/Query1/TitleComponent1'; // Assume similar to TitleComponent5
+import TitleComponent1 from '../components/QueryComponents/Query1/TitleComponent1';
 import SidebarQ1 from '../components/Sidebar/SidebarQ1';
 import ChartComponent from '../components/QueryComponents/Query1/ChartComponent';
-import DataTableComponent from '../components/QueryComponents/Query1/DataTableComponent'; // Assume it's reusable from Query5
+import DataTableComponent from '../components/QueryComponents/Query1/DataTableComponent';
 
 const Page1 = () => {
   const [query, setQuery] = useState({
@@ -18,7 +18,6 @@ const Page1 = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Possibly update display or trigger data fetching
   };
 
   return (

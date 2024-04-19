@@ -10,7 +10,6 @@ const AustriaBirdsGeoChart = ({ query }) => {
   useEffect(() => {
     async function fetchData() {
       try {
-        // Construct the query string using parameters from `query`
         const params = new URLSearchParams({
           stateProvince: query.stateProvince,
           startYear: query.startYear,
@@ -20,7 +19,6 @@ const AustriaBirdsGeoChart = ({ query }) => {
           `http://localhost:3000/api/query1?${params}`
         );
 
-        // Process the response data to fit the GeoChart data format
         const observationsData = response.data.map((item) => [
           item.STATEPROVINCE,
           item.OBSERVATION_COUNT,
@@ -37,7 +35,7 @@ const AustriaBirdsGeoChart = ({ query }) => {
     }
 
     fetchData();
-  }, [query]); // This ensures fetchData re-runs when query changes
+  }, [query]);
 
   return (
     <div>
@@ -47,7 +45,7 @@ const AustriaBirdsGeoChart = ({ query }) => {
         chartType="GeoChart"
         data={data}
         options={{
-          region: 'AT', // Austria
+          region: 'AT',
           resolution: 'provinces',
           colorAxis: { colors: ['#e6f2ff', '#0040ff'] },
           defaultColor: '#f5f5f5',

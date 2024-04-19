@@ -10,7 +10,6 @@ const ClimateBirdsComboChart = ({ query }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Construct the query string using parameters from `query`
         const params = new URLSearchParams({
           stateProvince: query.stateProvince,
           startYear: query.startYear,
@@ -28,7 +27,7 @@ const ClimateBirdsComboChart = ({ query }) => {
     };
 
     fetchData();
-  }, [query]); // React to changes in `query`
+  }, [query]);
 
   const calculateYearRanges = (data) => {
     const years = data.map((item) => item.YEAR);
@@ -76,8 +75,8 @@ const ClimateBirdsComboChart = ({ query }) => {
       ],
       ...Object.values(aggregatedData).map((item) => [
         item.YEAR.toString(),
-        item.AVG_TEMPERATURE / item.count, // average temperature
-        item.PRECIPITATION / item.count, // average precipitation
+        item.AVG_TEMPERATURE / item.count,
+        item.PRECIPITATION / item.count,
         item.OBSERVATION_COUNT,
         item.SPECIES_COUNT,
       ]),

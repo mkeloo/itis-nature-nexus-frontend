@@ -20,7 +20,6 @@ const COLORS = [
   '#ff7300',
 ];
 
-// Function to process your fetched data into the required structure for the RadialBarChart
 const processData = (rawData) => {
   const stateProvinceMap = new Map();
 
@@ -46,7 +45,6 @@ const RadialBarChartComponent = () => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    // Replace with your actual endpoint
     axios
       .get('http://localhost:3000/api/query5')
       .then((response) => {

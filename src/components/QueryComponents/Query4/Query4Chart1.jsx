@@ -59,7 +59,7 @@ const TotalObservationsOverTime = ({ query }) => {
     const fetchData = async () => {
       try {
         const response = await axios.get('http://localhost:3000/api/query4', {
-          params: query, // Use the query object directly
+          params: query,
         });
 
         const processedData = processData(response.data);
@@ -78,7 +78,7 @@ const TotalObservationsOverTime = ({ query }) => {
     };
 
     fetchData();
-  }, [query]); // Depend on query to refetch when it changes
+  }, [query]);
 
   return <TimeSeriesChart data={data} stateProvinces={stateProvinces} />;
 };

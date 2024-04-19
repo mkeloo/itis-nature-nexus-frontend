@@ -6,9 +6,6 @@ const Navbar = () => {
   return (
     <nav className="bg-indigo-950 text-white p-4">
       <div className="container mx-auto flex justify-between items-center">
-        {/* Logo Section */}
-
-        {/* Logo Section */}
         <Link to="/">
           <div className="flex items-center">
             <img src={logo} alt="Logo" className="h-12 mr-2" />
@@ -24,20 +21,7 @@ const Navbar = () => {
           </div>
         </Link>
 
-        {/* Navigation Links */}
         <div className="hidden md:flex space-x-4">
-          {/* <Link
-            to="/"
-            className="font-bold text-md text-white hover:text-green-400 hover:scale-110 duration-200 transition ease-in"
-          >
-            Home
-          </Link> */}
-          {/* <Link
-            to="/query-example"
-            className="font-bold text-md text-white hover:text-green-400 hover:scale-110 duration-200 transition ease-in"
-          >
-            Ex Query 1
-          </Link> */}
           <Link
             to="/climate-correlation"
             className="font-bold text-md text-white hover:text-green-400 hover:scale-110 duration-200 transition ease-in"
@@ -70,7 +54,6 @@ const Navbar = () => {
           </Link>
         </div>
 
-        {/* home */}
         <div>
           <button className="bg-gradient-to-r from-green-200 to-green-500 text-green-900 font-bold py-1 px-4 hover:scale-110 duration-200 text-md transition ease-in border-2 border-emerald-900 rounded-lg">
             <Link to="/">Home</Link>

@@ -5,12 +5,11 @@ import ChartComponent from '../components/QueryComponents/Query4/ChartComponent'
 import DataTableComponent from '../components/QueryComponents/Query4/DataTableComponent';
 
 const Page4 = () => {
-  // Default values can be adjusted to suit the typical needs of Query 4
   const [query, setQuery] = useState({
-    stateProvince: '', // Default province
-    startYear: 2015, // Default start year
-    endYear: new Date().getFullYear(), // Default to the current year
-    orderBy: 'year ASC', // Default sorting
+    stateProvince: '',
+    startYear: 2015,
+    endYear: new Date().getFullYear(),
+    orderBy: 'year ASC',
   });
 
   const handleInputChange = (e) => {
@@ -20,7 +19,6 @@ const Page4 = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // The submission here could trigger further actions, like explicitly fetching data if not using useEffect
   };
 
   return (

@@ -8,7 +8,7 @@ const DataTableComponent = ({ query, queryEndpoint }) => {
   useEffect(() => {
     const fetchData = async () => {
       const queryString = Object.keys(query)
-        .filter((key) => query[key] !== '') // Filter out empty params
+        .filter((key) => query[key] !== '')
         .map(
           (key) =>
             `${encodeURIComponent(key)}=${encodeURIComponent(query[key])}`
@@ -26,8 +26,7 @@ const DataTableComponent = ({ query, queryEndpoint }) => {
     };
 
     fetchData();
-  }, [query, queryEndpoint]); // Re-fetch when query or endpoint changes
-
+  }, [query, queryEndpoint]);
   const totalTuples = data.length;
 
   if (loading) {

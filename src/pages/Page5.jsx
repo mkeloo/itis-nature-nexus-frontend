@@ -21,7 +21,6 @@ const Page5 = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setDisplayQuery(JSON.stringify(query));
-    // No need to trigger fetching here if DataTableComponent uses useEffect to listen to query changes
   };
 
   return (

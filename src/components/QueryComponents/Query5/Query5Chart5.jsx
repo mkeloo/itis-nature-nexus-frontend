@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Chart from 'react-google-charts';
 
-// Define showFullTooltip outside the component as it does not rely on component's state or props
 function showFullTooltip(data) {
   return function (row, size, value) {
     return (
@@ -41,13 +40,10 @@ const TreeMapConservationChart = ({ query }) => {
           ['ID', 'Parent', 'Number of Species', 'Threatened Percentage'],
         ];
 
-        // Add a root node for the entire dataset
         processedData.push(['Austria', null, 0, 0]);
 
-        // Create a map to track unique stateProvinces
         const stateProvincesMap = new Map();
 
-        // Process the data from API
         response.data.forEach((item) => {
           const {
             STATEPROVINCE,
@@ -58,16 +54,13 @@ const TreeMapConservationChart = ({ query }) => {
             THREATENEDPERCENTAGE,
           } = item;
 
-          // Create unique ID for each stateProvince, if not already added
           if (!stateProvincesMap.has(STATEPROVINCE)) {
             processedData.push([STATEPROVINCE, 'Austria', null, null]);
             stateProvincesMap.set(STATEPROVINCE, true);
           }
 
-          // Create unique ID for each family-genus combination
           const uniqueId = `${FAMILY} | ${GENUS} (${STATEPROVINCE})`;
 
-          // Add the family-genus node to the data array
           processedData.push([
             uniqueId,
             STATEPROVINCE,
@@ -83,7 +76,7 @@ const TreeMapConservationChart = ({ query }) => {
     };
 
     fetchData();
-  }, [query]); // Re-fetch data when query changes
+  }, [query]);
 
   return (
     <Chart

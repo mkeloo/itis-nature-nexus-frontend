@@ -5,12 +5,10 @@ import ChartComponent from '../components/QueryComponents/Query3/ChartComponent'
 import DataTableComponent from '../components/QueryComponents/Query3/DataTableComponent';
 
 const Page3 = () => {
-  // Correct the component name from Page4 to Page3
-  // Default values adjusted to suit the typical needs of Query 3
   const [query, setQuery] = useState({
-    startYear: '', // Default start year as per your API endpoint
-    endYear: '', // Default to the current year
-    growthRateThreshold: '', // Default growth rate threshold
+    startYear: '',
+    endYear: '',
+    growthRateThreshold: '',
   });
 
   const handleInputChange = (e) => {
@@ -20,7 +18,6 @@ const Page3 = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Optional: trigger further actions here if needed
   };
 
   return (

@@ -13,7 +13,6 @@ const SidebarQ1 = ({ query, onInputChange, onSubmit }) => {
     'Steiermark',
   ];
 
-  // Static years from 2000 to 2024
   const years = Array.from({ length: 25 }, (_, i) => 2000 + i);
 
   return (

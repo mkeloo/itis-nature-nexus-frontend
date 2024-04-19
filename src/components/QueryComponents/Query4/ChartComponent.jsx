@@ -9,7 +9,6 @@ function ChartComponent({ query }) {
     setCurrentPage(pageNumber);
   };
 
-  // Render the appropriate chart based on the current page
   const renderChart = () => {
     switch (currentPage) {
       case 1:
@@ -17,7 +16,7 @@ function ChartComponent({ query }) {
       case 2:
         return <Query4Chart2 query={query} />;
       default:
-        return <div>No chart available</div>; // Default case if no page matches
+        return <div>No chart available</div>;
     }
   };
 
@@ -27,7 +26,6 @@ function ChartComponent({ query }) {
         <div className="w-full">{renderChart()}</div>
       </div>
       <div className="mt-4">
-        {/* Buttons for page switching */}
         {[1, 2].map((pageNumber) => (
           <button
             key={pageNumber}

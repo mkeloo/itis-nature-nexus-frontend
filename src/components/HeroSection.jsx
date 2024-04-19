@@ -5,7 +5,6 @@ const HomePage = () => {
   return (
     <div className="container mx-auto  text-black w-full h-[90vh] flex justify-center items-center">
       <div className="flex flex-wrap justify-center items-center">
-        {/* Text Area */}
         <div className="w-full lg:w-[45%] px-4 lg:px-0 mb-10 lg:mb-0 flex flex-col justify-center h-full m-4">
           <div className="mx-4">
             <h1 className="text-6xl lg:text-7xl font-bold mb-4 text-[#2543a6] bg-gradient-to-r from-emerald-400 to-[#5ba2ff] rounded-lg">
@@ -13,8 +12,8 @@ const HomePage = () => {
             </h1>
             <div className="bg-opacity-35 p-6 bg-[#5ba2ff] rounded-xl">
               <p className="text-lg lg:text-2xl mb-8 text-indigo-900 font-bold">
-                Discover the diversity of birds in Austria with Nature Nexus. Explore,
-                analyze, and connect with species data at your
+                Discover the diversity of birds in Austria with Nature Nexus.
+                Explore, analyze, and connect with species data at your
                 fingertips.
               </p>
               <div>
@@ -31,7 +30,6 @@ const HomePage = () => {
           </div>
         </div>
 
-        {/* Image Area */}
         <div className="w-full lg:w-[51%] lg:px-0 shadow-xl">
           <img
             src={HeroImage}

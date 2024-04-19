@@ -27,13 +27,11 @@ const Query3Chart = ({ query }) => {
     };
 
     fetchData();
-  }, [query]); // Dependency on query to refetch data when query parameters change
+  }, [query]);
 
-  // You need to extract the selected year range from the query object
   const startYear = query.startYear;
   const endYear = query.endYear;
 
-  // Custom Tooltip component to show details on hover
   const CustomTooltip = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
       const data = payload[0].payload;
@@ -51,7 +49,6 @@ const Query3Chart = ({ query }) => {
 
   return (
     <div>
-      {/* <h2 style={{ textAlign: 'center' }}>Bird Observations Growth Rate</h2> */}
       <ScatterChart
         width={1100}
         height={500}
@@ -67,7 +64,6 @@ const Query3Chart = ({ query }) => {
           type="number"
           dataKey="YEAR"
           name="Year"
-          // Set the domain dynamically based on the selected year range
           domain={[startYear, endYear]}
         >
           <Label value="Year" position="bottom" />

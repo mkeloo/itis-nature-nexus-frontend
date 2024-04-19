@@ -21,21 +21,17 @@ const TrendQueryExamplePage = () => {
     setDisplayQuery(queryText);
   };
 
-  // Placeholder data for the table
   const tableData = [
     { year: '2000', discoveries: '120' },
     { year: '2001', discoveries: '134' },
-    // ... more data
   ];
 
   return (
     <>
-      {/* Title */}
       <header className=" text-black bg-blue-100 font-bold text-3xl p-4 text-center">
         Species Discoveries Over Time
       </header>
       <div className="flex flex-row min-h-screen bg-gray-100 ">
-        {/* Sidebar */}
         <aside className="w-1/6 bg-blue-100 p-4">
           <h2 className="font-bold mb-4">Refine Query</h2>
           <form className="space-y-4" onSubmit={handleSubmit}>
@@ -108,9 +104,7 @@ const TrendQueryExamplePage = () => {
           {displayQuery && <p className="m-4">{displayQuery}</p>}
         </aside>
 
-        {/* Main Content */}
         <div className="flex flex-col w-5/6 p-4 justify-center items-center">
-          {/* Visualization Centerpiece */}
           <div
             className="bg-white p-4 shadow rounded mb-4 flex flex-row items-center"
             style={{ height: '500px' }}
@@ -120,7 +114,6 @@ const TrendQueryExamplePage = () => {
               alt="Biodiversity Map"
               className="max-w-full h-auto max-h-full rounded shadow"
             />
-            {/* Interactive Controls - Future Feature */}
             <div className="flex flex-col space-y-2 p-4">
               <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                 Toggle Legend
@@ -137,7 +130,6 @@ const TrendQueryExamplePage = () => {
             </div>
           </div>
 
-          {/* Data Table */}
           <div className="bg-white p-4 shadow rounded">
             <h3 className="font-bold mb-2 text-lg">Data Table</h3>
             <table className="table-fixed w-full">

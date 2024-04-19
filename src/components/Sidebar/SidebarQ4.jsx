@@ -1,7 +1,6 @@
 import React from 'react';
 
 const SidebarQ4 = ({ query, onInputChange, onSubmit }) => {
-  // List of Austrian state provinces for the dropdown
   const stateProvinces = [
     'Wien',
     'Niederösterreich',
@@ -14,13 +13,11 @@ const SidebarQ4 = ({ query, onInputChange, onSubmit }) => {
     'Steiermark',
   ];
 
-  // Static year range for the example
   const years = Array.from(
     { length: 2024 - 2000 + 1 },
     (_, index) => 2000 + index
   );
 
-  // OrderBy options customized for the population dynamics query
   const orderByOptions = [
     { value: 'year ASC', text: 'Year Ascending' },
     { value: 'year DESC', text: 'Year Descending' },

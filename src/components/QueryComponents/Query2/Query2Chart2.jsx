@@ -21,7 +21,6 @@ const BiodiversityPrecipitationRatioChart = ({ query }) => {
         const response = await axios.get('http://localhost:3000/api/query2', {
           params: query,
         });
-        // Process data to include a new property for the ratio
         const processedData = response.data.map((item) => ({
           ...item,
           BIODIVERSITY_TO_PRECIPITATION_RATIO:

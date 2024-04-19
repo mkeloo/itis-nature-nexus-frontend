@@ -1,7 +1,6 @@
 import React from 'react';
 
 const SidebarQ3 = ({ query, onInputChange, onSubmit }) => {
-  // Static years range, assuming the use case needs a wide range of years
   const years = Array.from(
     { length: new Date().getFullYear() - 2000 + 1 },
     (_, index) => 2000 + index

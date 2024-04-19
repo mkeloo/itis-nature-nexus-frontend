@@ -3,7 +3,6 @@
 import React from 'react';
 
 const SidebarQ2 = ({ query, onInputChange, onSubmit }) => {
-  // Assuming you want a range of years from 1950 to the current year
   const startYearRange = 1950;
   const endYearRange = new Date().getFullYear();
   const years = Array.from(
